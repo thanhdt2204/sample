@@ -1,5 +1,7 @@
 package com.example.sample.security;
 
+import com.example.sample.domain.User;
+import com.example.sample.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,13 +12,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("admin".equals(username)) {
-            return new MyUserDetails(username);
-        } else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findOneByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("Not found with user: " + email)
+        );
+        return new MyUserDetails(user);
     }
 
 }

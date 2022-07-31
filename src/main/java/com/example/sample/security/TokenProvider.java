@@ -52,11 +52,11 @@ public class TokenProvider implements Serializable {
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = myUserDetailsService.loadUserByUsername(getUsernameByToken(token));
+        UserDetails userDetails = myUserDetailsService.loadUserByUsername(getEmailByToken(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    private String getUsernameByToken(String token) {
+    private String getEmailByToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()

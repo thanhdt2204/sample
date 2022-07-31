@@ -7,10 +7,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class FormLogin {
+public class FormUser {
+
+    private Long id;
 
     private String email;
 
-    private String password;
+    private String firstName;
+
+    private String lastName;
 
 }

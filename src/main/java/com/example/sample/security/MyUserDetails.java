@@ -1,5 +1,6 @@
 package com.example.sample.security;
 
+import com.example.sample.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,11 +24,11 @@ public class MyUserDetails implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    MyUserDetails(String username) {
+    MyUserDetails(User user) {
         super();
-        this.username = username;
-        this.password = "";
-        this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        this.username = user.getEmail();
+        this.password = user.getPassword();
+        this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
     }
 
     @Override
