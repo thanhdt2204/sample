@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty
     @Email
     @Size(min = 5, max = 254)
     @Column(length = 254, nullable = false)
@@ -30,12 +31,12 @@ public class User implements Serializable {
     @Column(name = "password_hash", length = 60, nullable = false)
     private String password;
 
-    @NotNull
+    @NotEmpty
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
     private String firstName;
 
-    @NotNull
+    @NotEmpty
     @Size(max = 50)
     @Column(name = "last_name", length = 50)
     private String lastName;
