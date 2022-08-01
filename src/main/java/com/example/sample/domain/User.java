@@ -30,10 +30,12 @@ public class User implements Serializable {
     @Column(name = "password_hash", length = 60, nullable = false)
     private String password;
 
+    @NotNull
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
     private String firstName;
 
+    @NotNull
     @Size(max = 50)
     @Column(name = "last_name", length = 50)
     private String lastName;

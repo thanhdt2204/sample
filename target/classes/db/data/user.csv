@@ -1,2 +1,0 @@
-id;email;password_hash;first_name;last_name;role
-1;thanhdoan@gmail.com;$2a$04$2cCet8RQI1173W4fyzP5dep0zrmupBDlVMCQLu.Sp9.zFvuuNW7jy;Doan;Thanh;ROLE_ADMIN

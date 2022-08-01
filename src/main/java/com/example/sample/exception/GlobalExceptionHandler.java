@@ -7,6 +7,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -18,6 +23,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleBadCredentialsException() {
         return new ResponseEntity<>(Constants.Error.USERNAME_OR_PASSWORD_INCORRECT, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException ex) {
+        AtomicReference<String> message = new AtomicReference<>("");
+        Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
+        constraintViolations.forEach(item -> {
+            message.set(message + "[" + item.getPropertyPath() + ": " + item.getMessage() + "]");
+        });
+        return new ResponseEntity<>(message.get(), HttpStatus.BAD_REQUEST);
     }
 
 }

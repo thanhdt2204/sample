@@ -1,9 +1,0 @@
-
-  ${AnsiColor.GREEN} ██╗   ██╗ ████████╗
-  ${AnsiColor.GREEN} ██║   ██║ ╚══██╔══╝
-  ${AnsiColor.GREEN} ████████║    ██║
-  ${AnsiColor.GREEN} ██╔═══██║    ██║
-  ${AnsiColor.GREEN} ██║   ██║ ████████╗
-  ${AnsiColor.GREEN} ╚═╝   ╚═╝ ╚═══════╝
-
-${AnsiColor.BRIGHT_BLUE}Running Spring Boot ${spring-boot.version}
