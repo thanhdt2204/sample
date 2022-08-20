@@ -7,6 +7,7 @@ public final class Constants {
 
     public static final class Error {
         public static final String USERNAME_OR_PASSWORD_INCORRECT = "USERNAME_OR_PASSWORD_INCORRECT";
+        public static final String PERMISSION_DENIED = "PERMISSION_DENIED";
     }
 
     private Constants() {}

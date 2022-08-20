@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,11 @@ public class LoginService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(formLogin.getEmail(), formLogin.getPassword())
         );
-        return tokenProvider.createToken(formLogin.getEmail());
+        GrantedAuthority grantedAuthority = authentication.getAuthorities().stream().findFirst().orElse(null);
+        return tokenProvider.createToken(
+                formLogin.getEmail(),
+                grantedAuthority != null ? grantedAuthority.getAuthority() : null
+        );
     }
 
 }

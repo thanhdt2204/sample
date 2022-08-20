@@ -40,11 +40,12 @@ public class TokenProvider implements Serializable {
         this.tokenValidityInMilliseconds = 1000 * applicationProperties.getSecurity().getTokenValidityInSeconds();
     }
 
-    public String createToken(String username) {
+    public String createToken(String username, String role) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + tokenValidityInMilliseconds);
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(key, SignatureAlgorithm.HS512)

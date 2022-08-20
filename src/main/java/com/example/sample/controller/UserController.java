@@ -53,7 +53,7 @@ public class UserController {
 
     @ApiOperation("API-GET-USER")
     @GetMapping("/user/{email}")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<User> getUser(@PathVariable String email) {
         return ResponseEntity.ok().body(userService.get(email));
     }
